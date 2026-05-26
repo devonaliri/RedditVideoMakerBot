@@ -22,8 +22,9 @@ from utils import settings
 
 __version__ = "2.0.0"
 
+# Use DEBUG level locally for easier troubleshooting during development
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
@@ -98,35 +99,4 @@ def run_bot() -> None:
     length, number_of_comments = save_text_to_mp3(reddit_object)
     print_substep(f"Audio length: {length:.2f}s | Comments used: {number_of_comments}")
 
-    # Download screenshots
-    print_step("Downloading screenshots of Reddit post...")
-    download_screenshots_of_reddit_posts(reddit_object, number_of_comments)
-
-    # Prepare background video
-    print_step("Preparing background video...")
-    bg_config = get_background_config()
-    download_background(bg_config)
-    chop_background_video(bg_config, length, reddit_object)
-
-    # Render final video
-    print_step("Rendering final video...")
-    make_final_video(number_of_comments, length, reddit_object, bg_config)
-
-    # Cleanup temporary assets
-    print_step("Cleaning up temporary files...")
-    cleanup(reddit_object["thread_id"])
-
-    print_step("Video creation complete! ✅")
-
-
-if __name__ == "__main__":
-    try:
-        if not check_env():
-            sys.exit(1)
-        run_bot()
-    except KeyboardInterrupt:
-        print("\nInterrupted by user. Exiting...")
-        sys.exit(0)
-    except Exception as err:
-        handle_exception(err)
-        sys.exit(1)
+    # Downloa
