@@ -22,9 +22,9 @@ from utils import settings
 
 __version__ = "2.0.0"
 
-# Use DEBUG level locally for easier troubleshooting during development
+# Use INFO level to reduce noise in logs; switch to DEBUG when actively debugging
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
         logging.StreamHandler(sys.stdout),
@@ -97,6 +97,4 @@ def run_bot() -> None:
     # Generate TTS audio
     print_step("Generating text-to-speech audio...")
     length, number_of_comments = save_text_to_mp3(reddit_object)
-    print_substep(f"Audio length: {length:.2f}s | Comments used: {number_of_comments}")
-
-    # Downloa
+    print_substep(f"Audio len
